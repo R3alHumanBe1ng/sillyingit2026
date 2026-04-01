@@ -5,7 +5,7 @@ from wand import image
 
 app = Flask(__name__)
 
-client = genai.Client(api_key='AIzaSyDzKGMDweo3xYj6NJbIcXe2QDKqpDmew1k')
+client = genai.Client()
 
 IMG_SIZE = 420
 
