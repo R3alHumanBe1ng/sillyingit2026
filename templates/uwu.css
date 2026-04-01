@@ -1,0 +1,52 @@
+:root {
+    --bg: rgb(46, 0, 105);
+    --fontcolor: rgb(255, 255, 0);
+}
+
+@font-face {
+    font-family: 'gigi';
+    src: url("../assets/GIGI.TTF");
+}
+
+
+html {scrollbar-width: none;}
+body, html {height: 100%;}
+
+body::-webkit-scrollbar, body::-webkit-scrollbar-button {display: none;}
+
+body {
+    background-image: url("../assets/rainbowuwu.gif");
+    background-repeat: repeat;
+    background-size: 50%;
+    -ms-overflow-style: none;
+}
+
+header h1{
+    font-size: 5rem;
+    font-family: gigi;
+    color: var(--fontcolor);
+    background-color: var(--bg);
+    border-radius: 1.5rem;
+    width: 900px;
+    text-align: center;
+}
+
+
+.container {
+    display: flex;
+    height: fit-content;
+    border-radius: 1rem;
+    justify-content: center;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 1200px;
+}
+
+#main {
+    display: flex;
+    flex-direction: row;
+}
