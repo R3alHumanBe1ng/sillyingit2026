@@ -29,6 +29,8 @@ header h1{
     border-radius: 1.5rem;
     width: 900px;
     text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 
@@ -49,4 +51,14 @@ header h1{
 #main {
     display: flex;
     flex-direction: row;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+#buttons img {
+    width: 150px;
+    height: 20px;
 }
