@@ -5,7 +5,7 @@ from wand import image
 
 app = Flask(__name__)
 
-client = genai.Client()
+client = genai.Client(api_key='AIzaSyDzKGMDweo3xYj6NJbIcXe2QDKqpDmew1k')
 
 IMG_SIZE = 420
 
@@ -42,11 +42,11 @@ def make_meme():
     background = outputs[1]
     text = outputs[2]
      #TODO: Create gif from inputs (ImageMagick??)
-    with image(filename='assets/meme_background/'+background) as bg:
+    with image(filename='static/meme_background/'+background) as bg:
         bg.resize(IMG_SIZE, IMG_SIZE)
 
         with Image(width=IMG_SIZE, height=60, background=None) as caption_img:
-            caption_img.font = "assets/impact.ttf"
+            caption_img.font = "static/impact.ttf"
             caption_img.caption(
                 CAPTION,
                 width=WIDTH,
@@ -54,7 +54,7 @@ def make_meme():
                 gravity="center"
             )
 
-            with image(filename='assets/meme_subject/'+subject) as guy:
+            with image(filename='static/meme_subject/'+subject) as guy:
                 guy.coalesce()
 
                 for frame in guy.sequence:
@@ -81,3 +81,6 @@ def make_meme():
     
     blob.seek(0)
     return send_file(blob, mimetype="image/gif")
+
+if __name__ == "__main__":
+    app.run(debug=True)
