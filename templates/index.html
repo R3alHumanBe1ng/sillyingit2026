@@ -9,7 +9,7 @@
     <meta property="og:url" content="puturlhere">
     <meta property="og:type" content="website">
 
-    <link rel="stylesheet" href="../templates/uwu.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/uwu.css') }}" />
     <link rel="icon" href="iconlink">
     <title>Surge Meme Maker</title>
 </head>
@@ -215,5 +215,5 @@ and that’s kind of the magic of it (✧ω✧) just you (¬‿¬) three weird l
     </div>
 </body>
 
-<script src="badux.js"></script>
+<script src="{{ url_for('static', filename='badux.js') }}"></script>
 <script src="https://www.youtube.com/iframe_api"></script>

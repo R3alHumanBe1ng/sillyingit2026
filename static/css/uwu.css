@@ -5,12 +5,12 @@
 
 @font-face {
     font-family: 'gigi';
-    src: url("../assets/GIGI.TTF");
+    src: url("../GIGI.TTF");
 }
 
 @font-face {
     font-family: 'comicsans';
-    src: url("../assets/Comic\ Sans\ MS.ttf")
+    src: url("../Comic\ Sans\ MS.ttf")
 }
 
 
@@ -20,7 +20,7 @@ body, html {height: 100%;}
 body::-webkit-scrollbar, body::-webkit-scrollbar-button {display: none;}
 
 body {
-    background-image: url("../assets/rainbowuwu.gif");
+    background-image: url("../rainbowuwu.gif");
     background-repeat: repeat;
     background-size: 50%;
     -ms-overflow-style: none;
