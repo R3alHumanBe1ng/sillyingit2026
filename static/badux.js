@@ -45,4 +45,12 @@ window.addEventListener("mousedown", (e) => {
     e.preventDefault();
   });
 
-  window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
+
+
+  document.getElementById("enterBtn").addEventListener("click", () => {
+    document.getElementById("cover").remove();
+    player.playVideo();
+    window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
+    window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
+    window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
+  })
