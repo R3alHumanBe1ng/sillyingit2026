@@ -25,8 +25,7 @@ window.addEventListener("mousedown", (e) => {
         "PageUp",
         "PageDown",
         "Home",
-        "End",
-        " "
+        "End"
     ];
     switch (e.key) {
       case "w":
@@ -36,13 +35,11 @@ window.addEventListener("mousedown", (e) => {
         window.scrollBy({top: -STEP, behavior: "smooth"});
         break;
       default:
-        e.preventDefault();
+        if (keysToBlock.includes(e.key)) {
+            e.preventDefault();
+        }
         return;
     }
-    if (keysToBlock.includes(e.key)) {
-        e.preventDefault();
-    }
-    e.preventDefault();
   });
 
 
