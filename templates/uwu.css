@@ -8,6 +8,11 @@
     src: url("../assets/GIGI.TTF");
 }
 
+@font-face {
+    font-family: 'comicsans';
+    src: url("../assets/Comic\ Sans\ MS.ttf")
+}
+
 
 html {scrollbar-width: none;}
 body, html {height: 100%;}
@@ -34,11 +39,31 @@ header h1{
 }
 
 
-.container {
+.containerhead {
     display: flex;
     height: fit-content;
     border-radius: 1rem;
     justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    border-radius: 1rem;
+    justify-content: center;
+    background-color: var(--bg);
+    border-radius: 1.5rem;
+    color: var(--fontcolor);
+    font-family: comicsans;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+#desctitle {
+    text-align: center;
+    font-size: 3rem;
 }
 
 #content {
@@ -61,4 +86,14 @@ header h1{
 #buttons img {
     width: 150px;
     height: 20px;
+}
+
+#ad {
+    width: 100%;
+    height: 12rem;
+    display: block;
+}
+
+#maincontent {
+    width: 1000px;
 }
