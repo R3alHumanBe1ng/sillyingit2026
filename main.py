@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
+from io import BytesIO
+from google import genai
+from wand import image
 
 app = Flask(__name__)
 
-from google import genai
-
 client = genai.Client(api_key='AIzaSyDzKGMDweo3xYj6NJbIcXe2QDKqpDmew1k')
+
+IMG_SIZE = 420
 
 @app.route("/")
 def home():
@@ -12,6 +15,9 @@ def home():
 
 @app.route('/submit', methods=['POST'])
 def make_meme():
+    blob = BytesIO()
+    frames = []
+
     subject = request.form['field1']
     background = request.form['field2']
     text = request.form['field3']
@@ -36,3 +42,42 @@ def make_meme():
     background = outputs[1]
     text = outputs[2]
      #TODO: Create gif from inputs (ImageMagick??)
+    with image(filename='assets/meme_background/'+background) as bg:
+        bg.resize(IMG_SIZE, IMG_SIZE)
+
+        with Image(width=IMG_SIZE, height=60, background=None) as caption_img:
+            caption_img.font = "assets/impact.ttf"
+            caption_img.caption(
+                CAPTION,
+                width=WIDTH,
+                height=60,
+                gravity="center"
+            )
+
+            with image(filename='assets/meme_subject/'+subject) as guy:
+                guy.coalesce()
+
+                for frame in guy.sequence:
+                    with Image(image=frame) as frame_img:  # match size if needed
+                        # Start with background copy
+                        with bg.clone() as canvas:
+
+                            # Composite overlay (respects transparency)
+                            canvas.composite(frame_img, left=0, top=0)
+
+                            # Composite caption at bottom
+                            y = IMG_SIZE - caption_img.height
+                            canvas.composite(caption_img, 0, y)
+
+                            # Match frame delay
+                            canvas.delay = frame_img.delay
+                            frames.append(canvas.clone())
+    with Image(filename="meme.gif") as result:
+        for f in frames:
+            result.sequence.append(f)
+        result.optimize_layers()
+        img.format = "gif"
+        img.save(file=blob)
+    
+    blob.seek(0)
+    return send_file(blob, mimetype="image/gif")
