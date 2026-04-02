@@ -5,12 +5,11 @@
 
     <meta property="og:title" content="Surge Meme Maker">
     <meta property="og:description" content="Use this to make some haha funny memes using some cursed sparky and stormy art. We know creativity is too hard, so just fill in some blanks and let Gemini do the work!">
-    <meta property="og:image" content="imageurl">
-    <meta property="og:url" content="puturlhere">
+    <meta property="og:image" content="{{ url_for('static', filename='meme_subject/innocent.gif') }}">
     <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/uwu.css') }}" />
-    <link rel="icon" href="iconlink">
+    <link rel="icon" href="{{ url_for('static', filename='surgemememaker.ico') }}">
     <title>Surge Meme Maker</title>
 </head>
 
@@ -20,7 +19,7 @@
         <button id="enterBtn">Enter</button>
     </div>
     <div id="banner">
-        
+        <img src="{{ url_for('static', filename='aibanner.gif') }}">
     </div>
     <img src="https://99gifshop.neocities.org/items/1/pikachuuu.gif">
     <img src="https://99gifshop.neocities.org/items/4/adplea.gif">

@@ -235,5 +235,15 @@ body > img:nth-of-type(4) {
 #loadingText {
     margin-top: 1rem;
     font-size: 1.2rem;
-    
+
+}
+
+#banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#banner img {
+    display: block;
 }
