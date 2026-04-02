@@ -64,7 +64,7 @@ def make_meme():
                         with bg.clone() as canvas:
 
                             # Composite overlay (respects transparency)
-                            canvas.composite(frame_img, left=0, top=0)
+                            canvas.composite(frame_img, left=0, top=0, gravity='center')
 
                             # Composite caption at bottom
                             y = IMG_SIZE - caption_img.height
