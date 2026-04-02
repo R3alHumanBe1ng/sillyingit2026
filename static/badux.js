@@ -136,18 +136,20 @@ window.addEventListener("mousedown", (e) => {
     if (player) {
       if (fadeInterval) {
         clearInterval(fadeInterval);
+        fadeInterval = null;
       }
 
       player.playVideo();
       player.unMute();
-      player.setVolume(0);
+      player.setVolume(100);
+
 
       let volume = 0;
       const targetVolume = 100;
       const stepTime = 50;
       const step = 4;
 
-      const fadeInterval = setInterval(() => {
+      fadeInterval = setInterval(() => {
         volume += step;
 
         if (volume >= targetVolume) {
@@ -158,8 +160,7 @@ window.addEventListener("mousedown", (e) => {
 
         player.setVolume(volume);
       }, stepTime);
-
-      player.playVideo();
+    } else {
     }
 
     window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
