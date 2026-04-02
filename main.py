@@ -5,7 +5,7 @@ from wand import image, font
 
 app = Flask(__name__)
 
-client = genai.Client(api_key='AIzaSyApitqlvu7I3M1NOoIM20JlUQ8ZB4W6Sn8')
+client = genai.Client()
 
 IMG_SIZE = 420
 
