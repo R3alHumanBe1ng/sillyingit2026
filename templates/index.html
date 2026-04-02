@@ -92,7 +92,7 @@
             </div>
             <div id="maincontent">
                 <div class="container" id="mememaker">
-                    <form action="/submit" method="POST">
+                    <form action="/submit" method="POST" id="mememaker">
                         <p>
                             OMG hewwo~ owo! You wanna makes a meme? Yayyyyyyyyyyy! Okayy, here's how dis workies. I just needs to has THREE words (woah only 3 words)!
                             Just fill in the blank spaces below and I will make u a cool dank epic meme :3
@@ -108,8 +108,9 @@
                         <button type="submit">Submit button or smth</button>
                     </form>
                 </div>
-                <div class="container" id="asd"></div>
-                <div class="container" id="buttons"></div>
+                <div class="container" id="generatedmeme">
+                    <img id="meme" style="display:none; max-width:100%">
+                </div>
                 <div class="container" id="videoplayer">
                     <iframe
                         src="https://www.youtube.com/embed/j3p6q24QXRE?autoplay=1&controls=0&loop=1&playlist=j3p6q24QXRE" allow="autoplay" frameborder="0">
