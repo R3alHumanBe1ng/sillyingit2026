@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, send_file
 from io import BytesIO
 from google import genai
-from wand import image
+from wand import image, font
 
 app = Flask(__name__)
 
-client = genai.Client(api_key='AIzaSyDzKGMDweo3xYj6NJbIcXe2QDKqpDmew1k')
+client = genai.Client(api_key='AIzaSyApitqlvu7I3M1NOoIM20JlUQ8ZB4W6Sn8')
 
 IMG_SIZE = 420
 
@@ -22,7 +22,7 @@ def make_meme():
     background = request.form['field2']
     text = request.form['field3']
 
-    if subject == '' | background == '' | text == '':
+    if subject == '' or background == '' or text == '':
         return render_template('index.html')
     
     response = client.models.generate_content(
@@ -36,29 +36,30 @@ def make_meme():
         'input 3:\n' + text +
         '\nformat it in this way: output1|output2|output3'
     )
+    print(response)
 
     outputs = response.text.split('|')
     subject = outputs[0]
     background = outputs[1]
     text = outputs[2]
      #TODO: Create gif from inputs (ImageMagick??)
-    with image(filename='static/meme_background/'+background) as bg:
+    with image.Image(filename='static/meme_background/'+background) as bg:
         bg.resize(IMG_SIZE, IMG_SIZE)
 
-        with Image(width=IMG_SIZE, height=60, background=None) as caption_img:
-            caption_img.font = "static/impact.ttf"
+        with image.Image(width=IMG_SIZE, height=100, background=None) as caption_img:
+            caption_img.font = font.Font("static/impact.ttf", color='white', stroke_color='black', stroke_width=1)
             caption_img.caption(
-                CAPTION,
-                width=WIDTH,
-                height=60,
+                text,
+                width=IMG_SIZE,
+                height=100,
                 gravity="center"
             )
 
-            with image(filename='static/meme_subject/'+subject) as guy:
+            with image.Image(filename='static/meme_subject/'+subject) as guy:
                 guy.coalesce()
 
                 for frame in guy.sequence:
-                    with Image(image=frame) as frame_img:  # match size if needed
+                    with image.Image(image=frame) as frame_img:  # match size if needed
                         # Start with background copy
                         with bg.clone() as canvas:
 
@@ -72,12 +73,12 @@ def make_meme():
                             # Match frame delay
                             canvas.delay = frame_img.delay
                             frames.append(canvas.clone())
-    with Image(filename="meme.gif") as result:
+    with image.Image() as result:
         for f in frames:
             result.sequence.append(f)
         result.optimize_layers()
-        img.format = "gif"
-        img.save(file=blob)
+        result.format = "gif"
+        result.save(file=blob)
     
     blob.seek(0)
     return send_file(blob, mimetype="image/gif")
