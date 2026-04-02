@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: sillyhacksmemegen
+    name: sillyhacksmemegenerator
     env: python
     buildCommand:
       pip install -r requirements.txt
