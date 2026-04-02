@@ -8,12 +8,23 @@ const loadingText = document.getElementById("loadingText");
 const downloadBtn = document.getElementById("downloadBtn");
 let currentImageUrl = null;
 let player = null;
+let fadeInterval = null;
 
-window.onYoutubeIframeAPIReady = function () {
+window.onYouTubeIframeAPIReady = function () {
   player = new YT.Player("player", {
+    videoId: "j3p6q24QXRE",
+    playerVars: {
+      autoplay: 1,
+      mute: 1,
+      controls: 0,
+      loop: 1,
+      playlist: "j3p6q24QXRE",
+      playsinline: 1
+    },
     events: {
       onReady: (event) => {
         event.target.mute();
+        event.target.setVolume(0);
         event.target.playVideo();
       }
     }
@@ -123,21 +134,26 @@ window.addEventListener("mousedown", (e) => {
     document.getElementById("cover").remove();
 
     if (player) {
+      if (fadeInterval) {
+        clearInterval(fadeInterval);
+      }
+
+      player.playVideo();
       player.unMute();
       player.setVolume(0);
 
       let volume = 0;
       const targetVolume = 100;
-      const duration = 1500;
       const stepTime = 50;
-      const step = targetVolume / (duration / stepTime);
+      const step = 4;
 
-      const fade = setInterval(() => {
+      const fadeInterval = setInterval(() => {
         volume += step;
 
         if (volume >= targetVolume) {
           volume = targetVolume;
-          clearInterval(fade);
+          clearInterval(fadeInterval);
+          fadeInterval = null;
         }
 
         player.setVolume(volume);
@@ -146,7 +162,5 @@ window.addEventListener("mousedown", (e) => {
       player.playVideo();
     }
 
-    window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
-    window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
     window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
   })
