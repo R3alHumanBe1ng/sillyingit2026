@@ -5,6 +5,8 @@ const memeImg = document.getElementById("meme");
 const memeContainer = document.getElementById("generatedmeme");
 const throbber = document.getElementById("throbber");
 const loadingText = document.getElementById("loadingText");
+const downloadBtn = document.getElementById("downloadBtn");
+let currentImageUrl = null;
 
 form.addEventListener('submit', async function (e) {
   e.preventDefault();
@@ -15,6 +17,7 @@ form.addEventListener('submit', async function (e) {
   loadingText.style.display = "block";
   memeImg.style.display = "none";
   memeImg.removeAttribute("src");
+  downloadBtn.style.display = "none";
 
   try {
     const response = await fetch('/submit', {
@@ -34,6 +37,7 @@ form.addEventListener('submit', async function (e) {
     loadingText.style.display = "none";
     memeImg.src = imageUrl;
     memeImg.style.display = 'block';
+    downloadBtn.style.display = "block";
     form.reset();
 
   } catch (err) {
@@ -41,7 +45,19 @@ form.addEventListener('submit', async function (e) {
     throbber.style.display = "none";
     loadingText.style.display = "none";
     memeContainer.style.display = "none";
+    downloadBtn.style.display = "none";
   }
+});
+
+downloadBtn.addEventListener("click", () => {
+  if (!currentImageUrl) return;
+
+  const a = document.createElement("a");
+  a.href = currentImageUrl;
+  a.download = "epicmeme.gif";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 });
 
 
