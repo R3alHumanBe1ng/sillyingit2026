@@ -31,6 +31,7 @@ form.addEventListener('submit', async function (e) {
 
     const blob = await response.blob();
     const imageUrl = URL.createObjectURL(blob);
+    currentImageUrl = imageUrl;
 
 
     throbber.style.display = "none";
