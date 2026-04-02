@@ -7,6 +7,18 @@ const throbber = document.getElementById("throbber");
 const loadingText = document.getElementById("loadingText");
 const downloadBtn = document.getElementById("downloadBtn");
 let currentImageUrl = null;
+let player = null;
+
+window.onYoutubeIframeAPIReady = function () {
+  player = new YT.Player("player", {
+    events: {
+      onReady: (event) => {
+        event.target.mute();
+        event.target.playVideo();
+      }
+    }
+  })
+}
 
 form.addEventListener('submit', async function (e) {
   e.preventDefault();
@@ -109,7 +121,31 @@ window.addEventListener("mousedown", (e) => {
 
   document.getElementById("enterBtn").addEventListener("click", () => {
     document.getElementById("cover").remove();
-    player.playVideo();
+
+    if (player) {
+      player.unMute();
+      player.setVolume(0);
+
+      let volume = 0;
+      const targetVolume = 100;
+      const duration = 1500;
+      const stepTime = 50;
+      const step = targetVolume / (duration / stepTime);
+
+      const fade = setInterval(() => {
+        volume += step;
+
+        if (volume >= targetVolume) {
+          volume = targetVolume;
+          clearInterval(fade);
+        }
+
+        player.setVolume(volume);
+      }, stepTime);
+
+      player.playVideo();
+    }
+
     window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
     window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });
     window.scrollBy({ top: document.body.scrollHeight, behavior: "smooth" });

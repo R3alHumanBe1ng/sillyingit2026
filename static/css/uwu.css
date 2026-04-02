@@ -225,6 +225,8 @@ body > img:nth-of-type(4) {
 
 #throbber {
     margin: 2rem auto;
+    width: 420px;
+    height: 420px;
 }
 
 #meme {
@@ -246,4 +248,5 @@ body > img:nth-of-type(4) {
 
 #banner img {
     display: block;
+    width: 900px;
 }
