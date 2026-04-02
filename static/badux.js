@@ -2,10 +2,19 @@ const STEP = 400;
 
 const form = document.getElementById("mememake");
 const memeImg = document.getElementById("meme");
+const memeContainer = document.getElementById("generatedmeme");
+const throbber = document.getElementById("throbber");
+const loadingText = document.getElementById("loadingText");
 
 form.addEventListener('submit', async function (e) {
   e.preventDefault();
   const formData = new FormData(form);
+
+  memeContainer.style.display = "flex";
+  throbber.style.display = "block";
+  loadingText.style.display = "block";
+  memeImg.style.display = "none";
+  memeImg.removeAttribute("src");
 
   try {
     const response = await fetch('/submit', {
@@ -20,13 +29,20 @@ form.addEventListener('submit', async function (e) {
     const blob = await response.blob();
     const imageUrl = URL.createObjectURL(blob);
 
+
+    throbber.style.display = "none";
+    loadingText.style.display = "none";
     memeImg.src = imageUrl;
     memeImg.style.display = 'block';
+    form.reset();
+
   } catch (err) {
     console.error(err);
+    throbber.style.display = "none";
+    loadingText.style.display = "none";
+    memeContainer.style.display = "none";
   }
 });
-
 
 
 

@@ -215,3 +215,25 @@ body > img:nth-of-type(4) {
 #cover button:active {
     transform: scale(1.04);
 }
+
+#generatedmeme {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+}
+
+#throbber {
+    margin: 2rem auto;
+}
+
+#meme {
+    max-width: 100%;
+    border-radius: 1rem;
+}
+
+#loadingText {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    
+}
