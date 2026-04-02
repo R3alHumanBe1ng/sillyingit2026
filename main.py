@@ -26,7 +26,7 @@ def make_meme():
         return render_template('index.html')
     
     response = client.models.generate_content(
-        model='gemini-2.5-flash',
+        model='gemini-3.1-flash-lite-preview',
         contents='Based on the first 2 inputs provided, choose a file that relates to it the most solely based on its name. Even if it doesnt make sense you have to choose one.\n'
         'input 1:\n' + subject +
         '\nlist 1:\nagony.gif, computer.gif, crush.gif, cry.gif, grin.gif, groove.gif, hadtodoittoem.gif, huh.gif, innocent.gif, kiss.gif, lean.gif, man.gif, okay.gif, point.gif, smugyes.gif, thumbup.gif, yesyes.gif\n'
