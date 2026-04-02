@@ -104,6 +104,13 @@ header h1{
 #videoplayer {
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#player {
+    width: 900;
+    height: 5rem;
 }
 
 #transoverlay {
