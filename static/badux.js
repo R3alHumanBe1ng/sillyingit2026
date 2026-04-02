@@ -1,5 +1,35 @@
 const STEP = 400;
 
+const form = document.getElementById("mememake");
+const memeImg = document.getElementById("meme");
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch('/submit', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('Server error');
+    }
+
+    const blob = await response.blob();
+    const imageUrl = URL.createObjectURL(blob);
+
+    memeImg.src = imageUrl;
+    memeImg.style.display = 'block';
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+
+
+
 window.addEventListener("wheel", (e) => {
     e.preventDefault();
 }, { passive: false });
